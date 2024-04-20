@@ -105,3 +105,11 @@
 20. Guarde todo el trabajo. Detenga la aplicación si ya se está ejecutando e iníciela nuevamente. Abra [http://localhost:8080/teams](http://localhost:8080/teams). Deberías ver una respuesta JSON con los datos de tus equipos.
 
   **Parte 4 (Optional)- Crear a simple Team endpoint**
+  21. Regrese a TeamController y agregue un método que devuelva un único equipo con una identificación.
+  - Nombra el método como quieras. Sugerencia: getTeam.
+  - El tipo de devolución debe ser un Equipo.
+  - Utilice una anotación @GetMapping para asignar este método al patrón "/teams/{id}".
+  - Defina un parámetro llamado "id" de tipo Long anotado con @PathVariable.
+  - Lógica: devuelve el resultado del método findById(id).get() del teamRepository. (FindById() devuelve un Java 8 "Opcional", y get() simplemente devuelve el equipo real.
+
+22. Guarde todo el trabajo. Detenga la aplicación si ya se está ejecutando e iníciela nuevamente. Utilice [http://localhost:8080/teams](http://localhost:8080/teams) para anotar los valores de ID generados para cada equipo. Luego use URL como [http://localhost:8080/teams/1](http://localhost:8080/teams/1) o [http://localhost:8080/teams/2](http:// localhost:8080/teams/2) para obtener resultados para los equipos individuales.
