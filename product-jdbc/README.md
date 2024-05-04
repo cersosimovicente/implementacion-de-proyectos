@@ -191,11 +191,11 @@ public class ProductDao {
     }
 
     //Buscar un producto por su id
-    public Product findById(int id) {
+    public Product findById(Long id) {
         query = "SELECT * FROM products WHERE idproduct = ?";
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return new Product(resultSet.getLong("idproduct"), resultSet.getString("name"),
@@ -220,9 +220,9 @@ public class ProductDao {
             e.printStackTrace();
         }
         System.out.println("Product saved");
-        System.exit(1); // Terminates the program with exit code 1.
+        //System.exit(1); // Terminates the program with exit code 1.
     }
-}
+
 ~~~
 - Codificar en esta clase los metodos ***delete*** y ***update***
 
