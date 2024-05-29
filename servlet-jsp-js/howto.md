@@ -1,5 +1,5 @@
 ### 1. Configuración del Proyecto
-Primero, asegúrate de tener un entorno de desarrollo Java configurado con un servidor compatible con Servlets y JSP, como Apache Tomcat.
+Primero, debes de tener un entorno de desarrollo Java configurado con un servidor compatible con Servlets y JSP, como Apache Tomcat.
 ### 2. Estructura del Proyecto
 Un proyecto típico de Java web tendrá la siguiente estructura:
 ```bash
