@@ -1,4 +1,4 @@
-### Enunciado para el Código de Proyecto de Inicio de Sesión
+### Proyecto de Inicio de Sesión
 
 Este proyecto implementa un sistema básico de autenticación para usuarios en una aplicación web utilizando Java EE. El sistema distingue entre tres tipos de roles de usuario: Administrador, Editor y Usuario, redirigiéndolos a diferentes páginas de inicio según su rol tras la autenticación.
 
@@ -48,4 +48,16 @@ Este proyecto implementa un sistema básico de autenticación para usuarios en u
 4. Si el usuario desea cerrar sesión, `LogoutServlet` invalida la sesión y redirige a `Login.jsp`.
 
 Este sistema proporciona una estructura básica pero completa para la autenticación de usuarios basada en roles, utilizando servlets, beans y páginas JSP en una aplicación web Java EE.
-
+#### script db
+```sql
+create database customers; 
+show databases ; 
+use customers; 
+CREATE TABLE users( 
+ id INT NOT NULL AUTO_INCREMENT UNIQUE KEY, 
+ fullname VARCHAR(30) NOT NULL, 
+ email VARCHAR(30) PRIMARY KEY, 
+ username VARCHAR(30) NOT NULL UNIQUE KEY,
+ password VARCHAR(30) NOT NULL, 
+rol VARCHAR(20));
+```
