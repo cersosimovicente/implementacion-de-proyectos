@@ -8,9 +8,6 @@ Cuando desee segregar el nivel de acceso para cada usuario según sus roles, com
 ## ¿Qué es una sesión?
 HTTP es un protocolo sin estado, lo que significa que la conexión entre el servidor y el navegador se pierde una vez finalizada la transacción. Realmente no se puede rastrear quién realizó una solicitud y cuándo se canceló. La sesión nos ayuda a mantener un estado entre el cliente y el servidor y puede constar de múltiples solicitudes y respuestas entre el cliente y el servidor. Dado que tanto HTTP como el servidor web no tienen estado, se utilizaría información única (ID de sesión) para crear una sesión y este ID de sesión se pasa entre el servidor y el cliente en cada solicitud.
 
-## ¿Cómo ejecutar esta aplicación?
-El siguiente vídeo explica cómo y dónde probar esta aplicación.
-
 ### Login.jsp
 El JSP contiene un formulario HTML simple para ingresar las credenciales de inicio de sesión. Para poder iniciar sesión en cualquier aplicación.
 
