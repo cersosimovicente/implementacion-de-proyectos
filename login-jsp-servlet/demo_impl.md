@@ -42,6 +42,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
  
     try
     {
+        //llamar al metodo authenticateUser y pasarle el objeto loginBean
         String userValidate = loginDao.authenticateUser(loginBean);
  
         if(userValidate.equals("Admin_Role"))
