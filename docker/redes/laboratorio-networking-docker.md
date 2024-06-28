@@ -50,6 +50,23 @@ FROM alpine:latest
 RUN apk add --no-cache iptables
 CMD ["sh", "-c", "while true; do sleep 3600; done"]
 ```
+### Explicación del Comando
+
+El comando `CMD ["sh", "-c", "while true; do sleep 3600; done"]` en un `Dockerfile` está diseñado para mantener un contenedor en ejecución indefinidamente. Aquí está el desglose de cada parte:
+
+1. **`CMD ["sh", "-c", "..."]`**:
+    - `CMD` es una instrucción en el `Dockerfile` que especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen.
+    - `sh` es el intérprete de comandos de shell.
+    - `-c` indica que el siguiente argumento es un comando que se debe ejecutar en el shell.
+
+2. **`"while true; do sleep 3600; done"`**:
+    - `while true; do ...; done`: Es un bucle infinito en shell. La condición `true` siempre se evalúa como verdadera, por lo que el bucle se ejecuta indefinidamente.
+    - `sleep 3600`: Dentro del bucle, el comando `sleep 3600` hace que el shell espere (o "duerma") durante 3600 segundos (1 hora) antes de ejecutar la siguiente iteración del bucle.
+
+En resumen, el comando `while true; do sleep 3600; done` mantiene el contenedor en ejecución haciendo que duerma indefinidamente en intervalos de una hora. Esto es útil cuando deseas mantener un contenedor en funcionamiento para realizar tareas de red o depuración, pero no tienes un proceso específico que se ejecute continuamente.
+
+Este enfoque permite que el contenedor permanezca activo, lo que facilita la conexión a él para tareas de configuración, como la configuración de iptables en este caso.
+
 - Construir la imagen Docker para el router:
 ```bash
 docker build -t router .
