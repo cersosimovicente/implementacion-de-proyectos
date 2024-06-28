@@ -24,7 +24,7 @@ Para gestionar las redes creadas por el usuario:
 
 Nota: **Cada red docker que creo crea un puente de red específico para cada red que podemos ver con `ip a`**:
 
-![docker](img/bridge2.png)
+![docker](imgs/bridge2.png)
 
 ## Uso de las redes bridge definidas por el usuario
 
