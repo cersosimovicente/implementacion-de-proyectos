@@ -90,4 +90,7 @@ docker exec -it cliente2 curl <IP-del-servidor2>
 ```
 - Verificar que los contenedores pueden resolver nombres y conectarse a través del router.
 ##  6: Publicar en GitHub
+9. Publica el contenido en un repositorio de GitHub:
+- Crea un nuevo repositorio en GitHub.
+- Sube los archivos Dockerfile y cualquier otro archivo necesario.
 
