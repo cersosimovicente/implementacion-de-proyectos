@@ -43,6 +43,22 @@ docker run -it --name cliente2 --network red2 curlimages/curl
 ```
 ## 3: Crear un Contenedor Router
 6. Crear un contenedor que actuará como router entre  `red1` y `red2`
+- Usar una imagen que permita la configuración de iptables, por ejemplo, una imagen de Alpine con iptables instalado:
+```Dockerfile
+# router Dockerfile
+FROM alpine:latest
+RUN apk add --no-cache iptables
+CMD ["sh", "-c", "while true; do sleep 3600; done"]
+```
+- Construir la imagen Docker para el router:
+```bash
+docker build -t router .
+```
+- Iniciar el contenedor router y conectarlo a ambas redes:
+```bash
+docker run -d --name router --network red1 --privileged router
+docker network connect red2 router
+```
 
 ## 4: Configurar el Router
 7. Configurar iptables en el router para permitir el enrutamiento entre  `red1` y `red2`
@@ -73,5 +89,5 @@ docker exec -it cliente2 curl servidor1
 docker exec -it cliente2 curl <IP-del-servidor2>
 ```
 - Verificar que los contenedores pueden resolver nombres y conectarse a través del router.
-
+##  6: Publicar en GitHub
 
