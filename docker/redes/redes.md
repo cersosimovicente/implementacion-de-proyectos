@@ -20,7 +20,7 @@ a09fc74261e6        none                null                local
     * Aislar los contenedores del acceso exterior.
     * Publicar servicios que tengamos en los contenedores mediante redirecciones que docker implementará con las pertinentes reglas de iptables.
 
-    ![docker](img/bridge1.png)
+    ![docker](imgs/bridge1.png)
 
     Veamos un ejemplo:
 
