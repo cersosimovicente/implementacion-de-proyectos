@@ -22,15 +22,25 @@ docker network create red2
 
 ## 2:  Crear Contenedores de Servidores y Clientes
 2. Crear un contenedor servidor en `red1`
-- Iniciar un contenedor nginx en red1:
+- Iniciar un contenedor nginx en `red1`:
 ```bash
 docker run -d --name servidor1 --network red1 nginx:latest
 ```
-
-4. Crear un contenedor cliente en `red1`
-5. Crear un contenedor servidor en `red2`
-6. Crear un contenedor cliente en `red2`
-
+3. Crear un contenedor cliente en `red1`
+- Iniciar un contenedor curl en `red1`:
+```
+docker run -it --name cliente1 --network red1 curlimages/curl
+```
+4. Crear un contenedor servidor en `red2`
+- Iniciar un contenedor nginx en `red2`:
+ ```bash
+docker run -d --name servidor2 --network red2 nginx:latest
+```
+5. Crear un contenedor cliente en `red2`
+- Iniciar un contenedor curl en `red2`:
+```
+docker run -it --name cliente2 --network red2 curlimages/curl
+```
 ## 3: Crear un Contenedor Router
 6. Crear un contenedor que actuará como router entre  `red1` y `red2`
 
