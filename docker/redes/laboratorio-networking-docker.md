@@ -4,7 +4,7 @@
 Aprender a configurar una topología de red avanzada en Docker, incluyendo el uso de contenedores como routers.
 
 ## Topología de red
-![topologia de red](imgs/TopologíadeRedenDocker.drawio.png)
+![topologia de red](imgs//TopologiadeRedenDocker.drawio.png)
 
 
 ## Instrucciones
