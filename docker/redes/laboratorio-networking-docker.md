@@ -3,6 +3,10 @@
 ## Objetivo
 Aprender a configurar una topología de red avanzada en Docker, incluyendo el uso de contenedores como routers.
 
+## Topología de red
+![topologia de red](imgs/TopologíadeRedenDocker.drawio.png)
+
+
 ## Instrucciones
 
 1. Crear redes personalizadas:
