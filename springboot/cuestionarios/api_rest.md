@@ -35,5 +35,5 @@
 ## Ejercicios Prácticos
 18. Describe cómo implementarías una operación CRUD (Crear, Leer, Actualizar, Eliminar) en una API REST.
 19. ¿Cómo usarías Postman para probar una nueva API que acabas de desarrollar?
-20. Propón un ejemplo de una API REST para gestionar un catálogo de productos y describe brevemente los endpoints necesarios.
+20. Propone un ejemplo de una API REST para gestionar un catálogo de productos y describe brevemente los endpoints necesarios.
 
