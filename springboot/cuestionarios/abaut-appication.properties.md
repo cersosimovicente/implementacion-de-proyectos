@@ -29,3 +29,7 @@ Los valores `create`, `create-drop`, `validate` y `update` básicamente influyen
 - **create-drop:** Crea su esquema, su caso de prueba agrega algunos datos simulados, ejecuta sus pruebas y luego, durante la limpieza del caso de prueba, los objetos del esquema se eliminan, dejando una base de datos vacía.
 - **validate:**  Valida el esquema, no realiza cambios en la base de datos.
 - **update:** Consulta la API del controlador JDBC para obtener los metadatos de la base de datos y luego Hibernate compara el modelo de objetos que crea basándose en la lectura de sus clases anotadas e intentará ajustar el esquema al inicio de la aplicación. Intentará agregar nuevas columnas, restricciones, etc., pero nunca eliminará una columna o restricción que puede haber existido anteriormente pero que ya no forma parte del modelo de objetos de una ejecución anterior.
+## Recomendaciones
+- En los escenarios de casos de prueba, es probable que use create-drop.
+- En el desarrollo, es común ver a los desarrolladores usar update.
+- En producción, es muy recomendable que use none o simplemente no especifique esta propiedad. Es una práctica común que los DBA revisen los scripts de migración en busca de cambios en la base de datos, particularmente si su base de datos se comparte entre múltiples servicios y aplicaciones.
