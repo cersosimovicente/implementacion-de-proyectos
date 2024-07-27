@@ -147,14 +147,14 @@ Introduce las siguientes credenciales para acceder:
 
 ## Instrucciones:
 1. **Configuración y puesta en marcha del proyecto**:
-   - Levanten el proyecto y verifiquen que la base de datos se crea automáticamente con los datos de prueba.
-   - Accedan a la consola de la base de datos H2 a través de la siguiente URL: [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
-   - Exploren la documentación generada por Swagger en: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
+   - Levantar el proyecto y verificar que la base de datos se crea automáticamente con los datos de prueba.
+   - Acceder a la consola de la base de datos H2 a través de la siguiente URL: [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
+   - Explorar la documentación generada por Swagger en: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 
 2. **Prueba de la API desplegada**:
-   - Realicen peticiones a la API desplegada en un servidor gratuito.
+   - Realizar peticiones a la API desplegada en un servidor gratuito.
    - Para obtener todos los usuarios, usen la siguiente URL: [https://user-api-1-0.onrender.com/users](https://user-api-1-0.onrender.com/users).
-   - Para crear un nuevo usuario, realicen una petición POST a: [https://user-api-1-0.onrender.com/users](https://user-api-1-0.onrender.com/users) con el siguiente JSON en el cuerpo de la solicitud:
+   - Para crear un nuevo usuario, realizar una petición POST a: [https://user-api-1-0.onrender.com/users](https://user-api-1-0.onrender.com/users) con el siguiente JSON en el cuerpo de la solicitud:
      ```json
      {
          "name": "username01",
