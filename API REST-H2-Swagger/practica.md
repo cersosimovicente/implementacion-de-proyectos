@@ -224,5 +224,5 @@ Este comando mapeará el puerto 8080 del contenedor al puerto 8080 de tu máquin
    - Subido a un repositorio GitHub con acceso compartido a los instructores.
 
 ## Fecha de Entrega:
-- El proyecto deberá ser entregado completo antes del [insertar fecha de entrega aquí].
+- El proyecto deberá ser entregado completo antes del [].
 
