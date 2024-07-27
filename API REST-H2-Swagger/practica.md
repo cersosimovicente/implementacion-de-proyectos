@@ -20,6 +20,8 @@ Swagger es un conjunto de herramientas de software de código abierto para dise�
 ### Cómo Acceder a Swagger en el Proyecto:
 - Una vez que el proyecto esté levantado, pueden acceder a la documentación de Swagger en la siguiente URL: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 
+  
+
 ---
 
 ## H2
@@ -49,12 +51,12 @@ H2 es una base de datos relacional en memoria que se utiliza principalmente para
 
 ### Paso 1: Agregar Dependencias
 Añade las siguientes dependencias en tu archivo `pom.xml` si estás utilizando Maven:
-
+Spring Boot 3.x requiere utilizar la versión 2 de springdoc-openapi :
 ```xml
 <dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-boot-starter</artifactId>
-    <version>3.0.0</version>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.5.0</version>
 </dependency>
 ```
 
