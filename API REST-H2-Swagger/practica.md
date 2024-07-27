@@ -163,8 +163,47 @@ Introduce las siguientes credenciales para acceder:
      ```
 
 3. **Dockerización del proyecto**:
-   - El proyecto ya se encuentra dockerizado y subido en el siguiente repositorio: [https://hub.docker.com/repository/docker/javierhuebra/user-api/general](https://hub.docker.com/repository/docker/javierhuebra/user-api/general).
-   - Descarguen y corran la imagen Docker para asegurarse de que el proyecto se despliega correctamente en su entorno local.
+# Añadiendo Docker al Proyecto Spring Boot
+
+## Paso a Paso para Dockerizar el Proyecto
+
+### Paso 1: Crear un Archivo Dockerfile
+En el directorio raíz de tu proyecto, crea un archivo llamado `Dockerfile` con el siguiente contenido:
+
+```Dockerfile
+# Utiliza una imagen base de OpenJDK 11 con Alpine Linux
+FROM openjdk:21
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo JAR del proyecto al directorio de trabajo del contenedor
+COPY target/tu-proyecto-0.0.1-SNAPSHOT.jar app.jar
+
+# Expone el puerto en el que la aplicación escuchará
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+## Paso 2: Crear el JAR del Proyecto
+Ejecuta el siguiente comando en la terminal para construir el proyecto y generar el archivo JAR:
+```sh 
+mvn clean package
+```
+Este comando generará un archivo JAR en el directorio `target` del proyecto.
+
+## Paso 3: Construir la Imagen Docker
+Ejecuta el siguiente comando en la terminal desde el directorio raíz de tu proyecto para construir la imagen Docker:
+```sh
+docker build -t tu-nombre-de-usuario/tu-proyecto:latest .
+```
+## Paso 4: Ejecutar el Contenedor Docker
+Ejecuta el siguiente comando para correr el contenedor Docker:
+```sh
+docker run -p 8080:8080 tu-nombre-de-usuario/tu-proyecto:latest
+```
+Este comando mapeará el puerto 8080 del contenedor al puerto 8080 de tu máquina, permitiéndote acceder a la aplicación en http://localhost:8080.
 
 ## Material Entregable:
 1. **Documentación del Proyecto**:
@@ -182,7 +221,7 @@ Introduce las siguientes credenciales para acceder:
    - Instrucciones para descargar y correr la imagen Docker desde el repositorio.
 
 4. **Código Fuente del Proyecto**:
-   - Subido a un repositorio Git (GitHub, GitLab, etc.) con acceso compartido a los instructores.
+   - Subido a un repositorio GitHub con acceso compartido a los instructores.
 
 ## Fecha de Entrega:
 - El proyecto deberá ser entregado completo antes del [insertar fecha de entrega aquí].
