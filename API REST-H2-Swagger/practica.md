@@ -20,7 +20,7 @@ Swagger es un conjunto de herramientas de software de código abierto para dise�
 ### Cómo Acceder a Swagger en el Proyecto:
 - Una vez que el proyecto esté levantado, pueden acceder a la documentación de Swagger en la siguiente URL: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 
-![openapi](../images/openapi.png)
+![openapi](images/openapi.png)
 
 
 ---
