@@ -90,5 +90,33 @@ erDiagram
 ## Herramientas y tecnologías utilizadas
 
 
+%% Diagrama de paquetes en Mermaid
 
+```mermaid
+classDiagram
+    package "Controller" {
+        class UserRegistrationController
+    }
+
+    package "Service" {
+        class UserService
+    }
+
+    package "Repository" {
+        class UserRepository
+        class RoleRepository
+    }
+
+    package "Model" {
+        class User
+        class Role
+    }
+
+    %% Relaciones
+    UserRegistrationController --> UserService : "Llama a"
+    UserService --> UserRepository : "Usa"
+    UserService --> RoleRepository : "Usa"
+    UserRepository --> User : "Manipula"
+    RoleRepository --> Role : "Manipula"
+```
 
