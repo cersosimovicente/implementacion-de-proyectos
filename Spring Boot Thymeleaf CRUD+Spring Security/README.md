@@ -87,6 +87,8 @@ erDiagram
     ROLE ||--o{ USERS_ROLES : "has"
 
 ```
+## Herramientas y tecnologías utilizadas
+
 
 
 
