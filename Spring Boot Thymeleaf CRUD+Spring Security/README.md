@@ -19,12 +19,6 @@ En este tutorial, aprenderemos cómo desarrollar funciones de **registro**, **in
 5. **MySQL**: Base de datos relacional para almacenar información de usuarios y sesiones.
 
 ### ¿Qué aprenderás?
-# Tutorial Completo de Desarrollo de Aplicaciones Web con Spring Boot, Spring Security, JPA y Thymeleaf
-
-En este tutorial, cubriremos todo lo necesario para crear una aplicación web utilizando **Spring Boot**, **Spring Security**, **Spring Data JPA**, **Thymeleaf** y **MySQL**.
-
-## Contenidos del Tutorial
-
 ### 1. **Creación de una Aplicación Web Spring MVC con Spring Boot**
    - Aprenderás a crear una aplicación web basada en el patrón **Spring MVC** utilizando el marco **Spring Boot**, que simplifica la configuración y el desarrollo.
 
