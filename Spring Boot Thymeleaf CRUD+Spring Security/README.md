@@ -52,4 +52,41 @@ En este tutorial, aprenderemos cómo desarrollar funciones de **registro**, **in
 ### 11. **Uso de Atributos de Thymeleaf para Mostrar Información de Seguridad**
    - Aprenderás a usar los atributos de **Thymeleaf** para mostrar información relevante del usuario autenticado, como el **correo electrónico**, sus **roles** y otros **detalles de seguridad**.
 
+## Flujo de aplicación
+
+```mermaid
+flowchart LR
+    A[Browser] --> B[User Registration Controller]
+    B --> C[User Service]
+    C --> D[User Repository]
+    D --> E[MySQL]
+```
+
+## Diseño de Base de Datos (Diagrama ER)
+```mermaid
+erDiagram
+    USER {
+        BIGINT id
+        VARCHAR(255) email
+        VARCHAR(255) first_name
+        VARCHAR(255) last_name
+        VARCHAR(255) password
+    }
+    
+    ROLE {
+        BIGINT id
+        VARCHAR(255) name
+    }
+    
+    USERS_ROLES {
+        BIGINT user_id
+        BIGINT role_id
+    }
+    
+    USER ||--o{ USERS_ROLES : "has"
+    ROLE ||--o{ USERS_ROLES : "has"
+
+```
+
+
 
