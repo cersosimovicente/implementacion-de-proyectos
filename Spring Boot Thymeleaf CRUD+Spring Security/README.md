@@ -321,6 +321,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 ## 9. Configuración de seguridad de Spring
 ### se implementa en la etapa 2
 ## 10. Plantillas thymeleaf
+`index.html`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -361,6 +362,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 </body>
 </html>
 ```
+`new_employee.html`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -401,6 +403,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 </body>
 </html>
 ```
+`update_ployee.html`
 ```html
 <!DOCTYPE html>
 <html lang="en">
