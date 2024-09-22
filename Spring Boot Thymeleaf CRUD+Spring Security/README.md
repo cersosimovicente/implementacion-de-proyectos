@@ -87,8 +87,9 @@ erDiagram
     ROLE ||--o{ USERS_ROLES : "has"
 
 ```
-## 1. Crear proyecto de Spring Boot
->> Crear un proyecto de Spring Boot con Spring Initializer
+## 1. Crear proyecto de Spring Boot 
+### Etapa 1:
+Crear un proyecto de Spring Boot con Spring Initializer
 
 ## 2. Estructura del proyecto
 
@@ -244,3 +245,197 @@ public class Employee {
     private String email;
 }
 ```
+## 6. Capa de Repositorio
+```java
+package com.cersocode.employee_management_webapp.repository;
+
+import com.cersocode.employee_management_webapp.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+}
+```
+## 7. DTO - Registro de UsuarioDto 
+### se implementa en la etapa 2
+## 8. Capa de servicio
+```java
+package com.cersocode.employee_management_webapp.service;
+
+import com.cersocode.employee_management_webapp.model.Employee;
+
+import java.util.List;
+
+public interface EmployeeService {
+
+    List<Employee> getAllEmployees();
+    Employee saveEmployee(Employee employee);
+    Employee getEmployeeById(Long id);
+    void deleteEmployeeById(Long id);
+}
+```
+```java
+package com.cersocode.employee_management_webapp.service;
+
+import com.cersocode.employee_management_webapp.model.Employee;
+import com.cersocode.employee_management_webapp.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService{
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+    @Override
+    public Employee getEmployeeById(Long id) {
+        Optional<Employee> optional = employeeRepository.findById(id);employeeRepository.findById(id);
+        Employee employee = null;
+        if (optional.isPresent()) {
+            employee = optional.get();
+        } else {
+            throw new RuntimeException(" Employee not found for id :: " + id);
+        }
+        return employee;
+    }
+    @Override
+    public void deleteEmployeeById(Long id) {
+        employeeRepository.deleteById(id);
+    }
+}
+```
+## 9. Configuración de seguridad de Spring
+### se implementa en la etapa 2
+## 10. Plantillas thymeleaf
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-2">
+        <h1>Employees List</h1>
+        <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a>
+
+        <table class = "table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Employee First Name</th>
+                    <th>Employee Last Name</th>
+                    <th>Employee Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${listEmployees}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-2">
+        <h1>Employees List</h1>
+        <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a>
+
+        <table class = "table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Employee First Name</th>
+                    <th>Employee Last Name</th>
+                    <th>Employee Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${listEmployees}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Employee Management System</h1>
+    <hr>
+    <h2>Update Employee</h2>
+
+    <form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
+          method="POST">
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2"> Update Employee</button>
+    </form>
+
+    <hr>
+
+    <a th:href = "@{/}"> Back to Employee List</a>
+</div>
+</body>
+</html>
+```
+
