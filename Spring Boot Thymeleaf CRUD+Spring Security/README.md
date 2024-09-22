@@ -87,36 +87,16 @@ erDiagram
     ROLE ||--o{ USERS_ROLES : "has"
 
 ```
-## Herramientas y tecnologías utilizadas
+## 1. Crear proyecto de Spring Boot
+>> Crear un proyecto de Spring Boot con Spring Initializer
 
-
-%% Diagrama de paquetes en Mermaid
+##2. Estructura del proyecto
 
 ```mermaid
-classDiagram
-    package "Controller" {
-        class UserRegistrationController
-    }
-
-    package "Service" {
-        class UserService
-    }
-
-    package "Repository" {
-        class UserRepository
-        class RoleRepository
-    }
-
-    package "Model" {
-        class User
-        class Role
-    }
-
-    %% Relaciones
-    UserRegistrationController --> UserService : "Llama a"
-    UserService --> UserRepository : "Usa"
-    UserService --> RoleRepository : "Usa"
-    UserRepository --> User : "Manipula"
-    RoleRepository --> Role : "Manipula"
+graph LR
+    A[Sistema] --> B[controller]
+    A --> C[model]
+    A --> D[repository]
+    A --> E[service]
 ```
 
