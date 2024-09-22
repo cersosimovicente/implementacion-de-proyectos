@@ -442,4 +442,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 </html>
 ```
 ![Texto alternativo](imgs/employee_list.png)
+![Texto alternativo](imgs/employee_add.png)
+![Texto alternativo](imgs/employee_update.png)
 
