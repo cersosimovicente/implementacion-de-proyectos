@@ -542,5 +542,157 @@ int totalPages = page.getTotalPages();
 ```
 Esta información es útil para implementar la paginación en la vista con la plantilla Thymeleaf.
 ## 1. Cambios en el back-end
+### Cambios en la interfaz EmployeeService.java
+Agregue el siguiente método a esta interfaz:
+`Page<Employee> findPaginated(int pageNo, int pageSize);`
+**codigo completo**
+```java
+package com.cersocode.employee_management_webapp.service;
 
+import com.cersocode.employee_management_webapp.model.Employee;
+import org.springframework.data.domain.Page;
+
+
+import java.util.List;
+
+public interface EmployeeService {
+
+    List<Employee> getAllEmployees();
+    Employee saveEmployee(Employee employee);
+    Employee getEmployeeById(Long id);
+    void deleteEmployeeById(Long id);
+    Page<Employee> findPaginated(int pageNo, int pageSize);
+}
+```
+### Cambios de clase EmployeeServiceImpl.java 
+Agregue el siguiente método a la clase EmployeeServiceImpl:
+```java
+    @Override
+    public void deleteEmployeeById(Long id) {
+        employeeRepository.deleteById(id);
+    }
+    @Override
+    public Page<Employee> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.employeeRepository.findAll(pageable);
+    }
+}
+```
+### Cambios de clase EmployeeController.java
+Agregue el siguiente método de controlador a la clase EmployeeController para realizar la paginación:
+```java
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<Employee> pageable = employeeService.findPaginated(pageNo, pageSize);
+        List<Employee> listEmployees = pageable.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", pageable.getTotalPages());
+        model.addAttribute("totalItems", pageable.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+        return "index";
+    }
+```
+Además, necesitamos hacer un cambio en un método existente como se muestra a continuación:
+```java
+    @GetMapping("/")
+    public String viewHomePage(Model model) {
+        //model.addAttribute("listEmployees", employeeService.getAllEmployees());
+        //return "index";
+        return findPaginated(1, model);
+    }
+```
+## 2. Cambios en el front-end
+Agregue el siguiente código de paginación a index.html:
+```html
+ <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+```
+El código completo:
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-2">
+        <h1>Employees List</h1>
+        <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a>
+
+        <table class = "table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Employee First Name</th>
+                    <th>Employee Last Name</th>
+                    <th>Employee Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${listEmployees}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+```
+## 3. Ejecute la aplicación y la demostración
+![Texto alternativo](imgs/employee_pagined.png)
 
