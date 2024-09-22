@@ -500,3 +500,47 @@ public class EmployeeController {
 ![Texto alternativo](imgs/employee_add.png)
 ![Texto alternativo](imgs/employee_update.png)
 
+## Etapa 2 Paginacion 
+Descripción de las API de paginación de Spring Data JPA
+Para usar las API de paginación y ordenación proporcionadas por Spring Data JPA, la interfaz del repositorio debe extender la interfaz PagingAndSortingRepository que define el siguiente par de métodos (T se refiere a una clase de entidad):
+```java
+@NoRepositoryBean
+public interface PagingAndSortingRepository < T, ID > extends CrudRepository < T, ID > {
+
+    /**
+     * Returns all entities sorted by the given options.
+     *
+     * @param sort
+     * @return all entities sorted by the given options
+     */
+    Iterable < T > findAll(Sort sort);
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+     *
+     * @param pageable
+     * @return a page of entities
+     */
+    Page < T > findAll(Pageable pageable);
+}
+```
+La interfaz JpaRepository amplía la interfaz PagingAndSortingRepository, por lo que si la interfaz del repositorio es del tipo JpaRepository, no es necesario realizar ningún cambio en ella.
+Por ejemplo, use lo siguiente para obtener la primera página de la base de datos, con 5 elementos por página:
+```java
+int pageNumber = 1;
+int pageSize = 5;
+Pageable pageable = PageRequest.of(pageNumber, pageSize);
+ 
+Page<Product> page = repository.findAll(pageable);
+```
+A continuación, puede obtener el contenido real de la siguiente manera:
+`List<Employee> listEmployees = page.getContent();`
+Con un objeto Page se puede conocer el total de filas en la base de datos y el total de páginas según el tamaño de página dado:
+```java
+long totalItems = page.getTotalElements();
+int totalPages = page.getTotalPages();
+```
+Esta información es útil para implementar la paginación en la vista con la plantilla Thymeleaf.
+## 1. Cambios en el back-end
+
+
