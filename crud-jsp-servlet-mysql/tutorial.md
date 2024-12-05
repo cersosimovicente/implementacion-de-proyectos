@@ -350,3 +350,161 @@ public class UserServlet extends HttpServlet {
     }
 }
 ```
+
+### 1. index.jsp
+Este archivo sirve como la página de inicio y redirige al listado de usuarios.
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD con JSP y Servlets</title>
+</head>
+<body>
+    <h1>Bienvenido al CRUD</h1>
+    <a href="list-users.jsp">Ver Lista de Usuarios</a>
+</body>
+</html>
+
+```
+### 2. list-users.jsp
+Lista todos los usuarios en la base de datos con opciones para agregar, editar y eliminar.
+
+```jsp
+<%@ page import="com.example.crud.User" %>
+<%@ page import="com.example.crud.UserDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+</head>
+<body>
+    <h1>Usuarios</h1>
+    <a href="add-user.jsp">Agregar Nuevo Usuario</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>País</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                UserDAO userDAO = new UserDAO();
+                for (User user : userDAO.selectAllUsers()) {
+            %>
+            <tr>
+                <td><%= user.getId() %></td>
+                <td><%= user.getName() %></td>
+                <td><%= user.getEmail() %></td>
+                <td><%= user.getCountry() %></td>
+                <td>
+                    <a href="edit-user.jsp?id=<%= user.getId() %>">Editar</a>
+                    <a href="UserServlet?action=delete&id=<%= user.getId() %>" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+        </tbody>
+    </table>
+</body>
+</html>
+
+```
+### 3. add-user.jsp
+Formulario para agregar un nuevo usuario.
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Usuario</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Usuario</h1>
+    <form action="UserServlet" method="post">
+        <input type="hidden" name="action" value="insert">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="country">País:</label>
+        <input type="text" id="country" name="country" required><br><br>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
+```
+### 4. edit-user.jsp
+Formulario para editar un usuario existente.
+```jsp
+<%@ page import="com.example.crud.User" %>
+<%@ page import="com.example.crud.UserDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario</title>
+</head>
+<body>
+    <%
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.selectUser(id);
+    %>
+    <h1>Editar Usuario</h1>
+    <form action="UserServlet" method="post">
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="id" value="<%= user.getId() %>">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" value="<%= user.getName() %>" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.getEmail() %>" required><br><br>
+        <label for="country">País:</label>
+        <input type="text" id="country" name="country" value="<%= user.getCountry() %>" required><br><br>
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>
+<%@ page import="com.example.crud.User" %>
+<%@ page import="com.example.crud.UserDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario</title>
+</head>
+<body>
+    <%
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.selectUser(id);
+    %>
+    <h1>Editar Usuario</h1>
+    <form action="UserServlet" method="post">
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="id" value="<%= user.getId() %>">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" value="<%= user.getName() %>" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.getEmail() %>" required><br><br>
+        <label for="country">País:</label>
+        <input type="text" id="country" name="country" value="<%= user.getCountry() %>" required><br><br>
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>
+
+```
+##FIN
