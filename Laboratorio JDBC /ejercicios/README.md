@@ -1,8 +1,113 @@
 # Ejercicios JDBC
 
-Script de Base de Datos MySQL para JDBC
+Script de Base de Datos MySQL para los ejercicios JDBC
+```sql
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS empresa;
+USE empresa;
 
+-- Tabla: empleados
+CREATE TABLE IF NOT EXISTS empleados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    salario DECIMAL(10,2) NOT NULL
+);
 
+-- Tabla: productos
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    stock INT NOT NULL
+);
+
+-- Tabla: cuentas (para transacciones)
+CREATE TABLE IF NOT EXISTS cuentas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titular VARCHAR(100) NOT NULL,
+    saldo DECIMAL(10,2) NOT NULL
+);
+
+-- Tabla: clientes
+CREATE TABLE IF NOT EXISTS clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(150),
+    telefono VARCHAR(20),
+    email VARCHAR(100) UNIQUE
+);
+
+-- Datos iniciales para pruebas
+INSERT INTO empleados (nombre, apellido, email, salario) VALUES
+('Ana', 'Martínez', 'ana.martinez@empresa.com', 3200.00),
+('Luis', 'Gómez', 'luis.gomez@empresa.com', 2800.00);
+
+INSERT INTO productos (nombre, precio, stock) VALUES
+('Teclado', 25.50, 100),
+('Mouse', 18.00, 150),
+('Monitor', 150.00, 30);
+
+INSERT INTO cuentas (titular, saldo) VALUES
+('Carlos Pérez', 1000.00),
+('Sofía Ramírez', 2000.00);
+
+INSERT INTO clientes (nombre, direccion, telefono, email) VALUES
+('Juan Torres', 'Av. Libertad 123', '123456789', 'juan.torres@correo.com'),
+('María López', 'Calle Falsa 456', '987654321', 'maria.lopez@correo.com');
+```
+
+```mermaid
+erDiagram
+    EMPLEADOS {
+        INT id PK
+        VARCHAR nombre
+        VARCHAR apellido
+        VARCHAR email
+        DECIMAL salario
+    }
+
+    PRODUCTOS {
+        INT id PK
+        VARCHAR nombre
+        DECIMAL precio
+        INT stock
+    }
+
+    CLIENTES {
+        INT id PK
+        VARCHAR nombre
+        VARCHAR direccion
+        VARCHAR telefono
+        VARCHAR email
+    }
+
+    CUENTAS {
+        INT id PK
+        VARCHAR titular
+        DECIMAL saldo
+    }
+
+    VENTAS {
+        INT id PK
+        DATE fecha
+        INT cliente_id FK
+        INT producto_id FK
+        INT cantidad
+    }
+
+    EMPLEADO_VENTA {
+        INT id PK
+        INT venta_id FK
+        INT empleado_id FK
+    }
+
+    CLIENTES ||--o{ VENTAS : realiza
+    PRODUCTOS ||--o{ VENTAS : es_vendido_en
+    EMPLEADOS ||--o{ EMPLEADO_VENTA : participa_en
+    VENTAS ||--|| EMPLEADO_VENTA : registrada_en
+```
 
 ### Ejercicio 1: Conexión a la base de datos
 Crea una aplicación Java que se conecte a una base de datos MySQL llamada empresa. Verifica la conexión y muestra un mensaje por consola indicando si la conexión fue exitosa o no.
