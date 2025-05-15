@@ -108,6 +108,15 @@ erDiagram
     EMPLEADOS ||--o{ EMPLEADO_VENTA : participa_en
     VENTAS ||--|| EMPLEADO_VENTA : registrada_en
 ```
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
+
+
 
 ### Ejercicio 1: Conexión a la base de datos
 Crea una aplicación Java que se conecte a una base de datos MySQL llamada empresa. Verifica la conexión y muestra un mensaje por consola indicando si la conexión fue exitosa o no.
