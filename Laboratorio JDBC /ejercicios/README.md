@@ -108,6 +108,10 @@ erDiagram
     EMPLEADOS ||--o{ EMPLEADO_VENTA : participa_en
     VENTAS ||--|| EMPLEADO_VENTA : registrada_en
 ```
+### Crea un proyecto maven y agregá la dependencia en el archivo `pom.xml`. Esta dependencia descarga el driver de mysql
+#### Recomendaciones :
+crear un package por ejercicio
+
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
