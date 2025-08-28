@@ -1,4 +1,4 @@
-#Ejercicio 1 – Búsqueda y cuotas
+# Ejercicio 1 – Búsqueda y cuotas
 
 Imagina que tienes una tienda online de productos electrónicos. Para cada producto, tienes su ID, su nombre y su precio.
 
