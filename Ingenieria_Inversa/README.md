@@ -1,23 +1,66 @@
-// Proyecto de ejemplo para ingeniería inversa
-// Contiene: interfaces, herencia, agregación, composición
-//Objetivo del proyecto
-A menudo nos encontramos con código generados por terceros que tenemos que modificar, ya sea para agregar funcionalidad, o corregir errores. En estos casos es impresindible conocer las funcionalidad del código. Considero que lo mas adecuado es el analisis de las estructuras a nivel de clases e interfaces como componentes principales
-// ------------------------------------------------------------------
-// DESCRIPCIÓN DEL PROYECTO:
-// Este proyecto en Java fue diseñado con fines educativos para practicar
-// ingeniería inversa y modelado UML. Incluye distintos conceptos de la
-// Programación Orientada a Objetos:
-//
-// - Interfaces: Conducible y Asegurable definen comportamientos que deben ser
-// implementados por las clases derivadas (ej. Auto y Camion).
-// - Herencia: VehiculoMotorizado es una clase abstracta que sirve de base para
-// Auto y Camion, heredando atributos comunes como marca y modelo.
-// - Composición: Auto y Camion poseen objetos Motor y Rueda que no existen
-// fuera de estos vehículos, formando parte esencial de su estructura.
-// - Agregación: Conductor y Garage se relacionan con los vehículos, pero existen
-// independientemente de ellos.
-//
-// La idea es que practiquen leyendo el código e infiriendo las relaciones entre clases 
+# Proyecto de Ejemplo para Ingeniería Inversa
+
+## Contenido del Proyecto
+
+Este proyecto contiene ejemplos de los siguientes conceptos de Programación Orientada a Objetos (POO):
+
+- **Interfaces**
+- **Herencia**
+- **Agregación**
+- **Composición**
+
+---
+
+## Objetivo del Proyecto
+
+A menudo nos encontramos con código generado por terceros que debemos modificar, ya sea para agregar funcionalidad o corregir errores.  
+En estos casos, es imprescindible comprender el funcionamiento del código.
+
+Una estrategia adecuada es analizar las **estructuras a nivel de clases e interfaces**, ya que estas representan los componentes principales del sistema.
+
+---
+
+## Descripción del Proyecto
+
+Este proyecto en **Java** fue diseñado con fines educativos para practicar:
+
+- **Ingeniería inversa**
+- **Modelado UML**
+
+Incluye varios conceptos clave de la programación orientada a objetos:
+
+### Interfaces
+
+- `Conducible` y `Asegurable` definen comportamientos que deben ser implementados por las clases derivadas, como:
+  - `Auto`
+  - `Camion`
+
+### Herencia
+
+- `VehiculoMotorizado` es una **clase abstracta** que sirve de base para:
+  - `Auto`
+  - `Camion`
+
+  Esta clase hereda atributos comunes como:
+  - `marca`
+  - `modelo`
+
+### Composición
+
+- `Auto` y `Camion` **poseen objetos** `Motor` y `Rueda`.
+- Estos objetos **no existen independientemente** de los vehículos, ya que forman parte esencial de su estructura.
+
+### Agregación
+
+- `Conductor` y `Garage` **se relacionan** con los vehículos.
+- Sin embargo, **pueden existir de forma independiente**.
+
+---
+
+## Actividad Recomendada
+
+Se recomienda leer el código e **inferir las relaciones entre clases**, practicando así el análisis estructural y la comprensión del diseño del sistema desde una perspectiva de ingeniería inversa.
+
 
 ```java
 package com.example.reverseengineering;
